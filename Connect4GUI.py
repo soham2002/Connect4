@@ -7,6 +7,7 @@ BLUE = (22,111,190)
 BLACK = (0,0,0)
 RED = (255,0,0)
 YELLOW = (255,255,0)
+WHITE = (255,255,255)
 
 ROW_COUNT = 6
 COL_COUNT = 7
@@ -82,6 +83,8 @@ screen = pygame.display.set_mode(size)
 draw_board(board)
 pygame.display.update()
 
+myfont = pygame.font.SysFont("Consolas", 75)
+
 
 while not game_over:
 
@@ -112,6 +115,8 @@ while not game_over:
                 
                 if winning_move(board,1):
                     print("\n \t PLAYER 1 WINS!!!\t \n")
+                    label = myfont.render("PLAYER 1 WINS!!", 1, WHITE)
+                    screen.blit(label, (40,10))
                     game_over = True
             # Asking Player2 for Input
             else:
@@ -125,10 +130,15 @@ while not game_over:
                 
                 if winning_move(board,2):
                     print("\n \t PLAYER 2 WINS!!!\t \n")
+                    label = myfont.render("PLAYER 2 WINS!!", 1, WHITE)
+                    screen.blit(label, (40,10))
                     game_over = True
         
             print_board(board)
             draw_board(board)
             turn +=1
             turn %=2
+            
+        if game_over:
+            pygame.time.wait(3000)
         
